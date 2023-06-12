@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LogCheckController;
 
-Route::get('/home', function () {
+Route::get('/', function () {
     return view('welcome');
 });
 

@@ -6,13 +6,23 @@ use Illuminate\Http\Request;
 
 class LogCheckController extends Controller
 {
+    private $batas_bawah_enzim_diastase = 3.040;
+    private $batas_atas_enzim_diastase = 9.121;
+    private $batas_bawah_kadar_air = 10.572;
+    private $batas_atas_kadar_air = 24.173;
+    private $batas_bawah_glukosa = 60.644;
+    private $batas_atas_glukosa = 73.886;
+    private $batas_bawah_hidroksi_metilfurfural = 4.862;
+    private $batas_atas_hidroksi_metilfurfural = 26.971;
+    private $batas_bawah_stok = 100;
+    private $batas_atas_stok = 2500;
+    private $batas_bawah_harga = 5000;
+    private $batas_atas_harga = 8000;
 
-    private $batas_bawah_kilogram = 2;
-    private $batas_atas_kilogram = 100;
+    private $batas_bawah_kilogram = 100;
+    private $batas_atas_kilogram = 2500;
     private $batas_bawah_variant = 10;
     private $batas_atas_variant = 300;
-    private $batas_bawah_harga = 35000;
-    private $batas_atas_harga = 95000;
     private $batas_bawah_kualitas = 2;
     private $batas_atas_kualitas = 4;
 
@@ -20,34 +30,27 @@ class LogCheckController extends Controller
         $data = $request->all();
         $fasilitas = array_sum($request['fasilitas']);
         $kualitas = array_sum($request['kualitas']);
+        $enzim_diatase = array_sum($request['enzim_diastase']);
+        $kadar_air = array_sum($request['kadar_air']);
+        $glukosa = array_sum($request['glukosa']);
+        $hidroksi_metilfurfural = array_sum($request['hidroksi_metilfurfural']);
+        $stok = array_sum($request['stok']);
         
         // R1
-        $aPredikat1 = min([$this->luas_kecil($data['luas']), $this->fasilitas_banyak($fasilitas)]);
-        $aPredikat1b = min([$this->fasilitas_sedikit($data['fasilitas']), $this->kualitas_tinggi($kualitas)]);
-        $aPredikat1c = min([$this->luas_kecil($data['luas']),$this->kualitas_tinggi($kualitas)]);
-        $aPredikat1d = min([$this->luas_besar($data['luas']),$this->kualitas_rendah($kualitas)]);
-        $z1 = $aPredikat1 * $aPredikat1b * $aPredikat1c * $aPredikat1d * ($this->batas_atas_harga - $this->batas_bawah_harga) +  $this->batas_bawah_harga;
+        $aPredikat = min([$this->ameningkat($data['enzim_diastase']),$this->bmeningkat($data['kadar_air']), $this->cmeningkat($data['glukosa']), $this->dmeningkat($data['hidroksi_metilfurfural']), $this->emeningkat($data['stok'])]);
+        $z1 = $aPredikat * ($this->batas_atas_harga - $this->batas_bawah_harga) + $this->batas_bawah_harga;
 
         // R2
-        $aPredikat2 = min([$this->luas_kecil($data['luas']), $this->fasilitas_sedikit($fasilitas)]);
-        $aPredikat2b = min([$this->fasilitas_sedikit($data['fasilitas']), $this->kualitas_rendah($kualitas)]);
-        $aPredikat2c = min([$this->luas_besar($data['luas']),$this->kualitas_rendah($kualitas)]);
-        $aPredikat2d = min([$this->luas_kecil($data['luas']),$this->kualitas_tinggi($kualitas)]);
-        $z2 = ($aPredikat2 * $aPredikat2b * $aPredikat2c * $aPredikat2d * ($this->batas_atas_harga - $this->batas_bawah_harga) - $this->batas_atas_harga) * -1;
+        $aPredikat2 = min([$this->ameningkat($data['enzim_diastase']),$this->bmeningkat($data['kadar_air']),$this->cmeningkat($data['glukosa']),$this->dmeningkat($data['hidroksi_metilfurfural']),$this->emeningkat($data['stok'])]);
+        $z2 = ($aPredikat2 * ($this->batas_atas_harga - $this->batas_bawah_harga) + $this->batas_bawah_harga) * -1;
 
         // R3
-        $aPredikat3 = min([$this->luas_besar($data['luas']), $this->fasilitas_banyak($fasilitas)]);
-        $aPredikat3b = min([$this->fasilitas_banyak($data['fasilitas']), $this->kualitas_tinggi($kualitas)]);
-        $aPredikat3c = min([$this->luas_kecil($data['luas']),$this->kualitas_tinggi($kualitas)]);
-        $aPredikat3d = min([$this->luas_besar($data['luas']),$this->kualitas_rendah($kualitas)]);
-        $z3 = $aPredikat3 * $aPredikat3b * $aPredikat3c * $aPredikat3d * ($this->batas_atas_harga -  $this->batas_bawah_harga) +  $this->batas_bawah_harga;
+        $aPredikat3 = min([$this->ameningkat($data['enzim_diastase']),$this->bmenurun($data['kadar_air']),$this->cmeningkat($data['glukosa']),$this->dmeningkat($data['hidroksi_metilfurfural']),$this->emeningkat($data['stok'])]);
+        $z3 = $aPredikat3 * ($this->batas_atas_harga - $this->batas_bawah_harga) + $this->batas_bawah_harga;
 
         // R4
-        $aPredikat4 = min([$this->luas_besar($data['luas']), $this->fasilitas_sedikit($fasilitas)]);
-        $aPredikat4b = min([$this->fasilitas_banyak($data['kualitas']), $this->kualitas_rendah($kualitas)]);
-        $aPredikat4c = min([$this->luas_besar($data['luas']),$this->kualitas_rendah($kualitas)]);
-        $aPredikat4d = min([$this->luas_kecil($data['luas']),$this->kualitas_tinggi($kualitas)]);
-        $z4 = ($aPredikat4 * $aPredikat4b * $aPredikat4c * $aPredikat4d * ($this->batas_atas_harga -  $this->batas_bawah_harga) - $this->batas_atas_harga) * -1;
+        $aPredikat4 = min([$this->ameningkat($data['enzim_diastase']), $this->bmenurun($data['kadar_air']),$this->cmeningkat($data['glukosa']),$this->dmeningkat($data['hidroksi_metilfurfural']),$this->emningkat($data['stok'])]);
+        $z4 = (aPredikat4 *  ($this->batas_atas_harga - $this->batas_bawah_harga) + $this->batas_bawah_harga) * -1;
 
         $z_rata_rata = (($aPredikat1 + $aPredikat1b + $aPredikat1c * $aPredikat1d) * $z1 + ($aPredikat2 + $aPredikat2b + $aPredikat2c + $aPredikat2d) * $z2 + ($aPredikat3 + $aPredikat3b + $aPredikat3c + $aPredikat3d) * $z3 + ($aPredikat4 + $aPredikat4b + $aPredikat4c + $aPredikat4d) * $z4) / ($aPredikat1 + $aPredikat2 + $aPredikat3 + $aPredikat4 + $aPredikat1b + $aPredikat2b + $aPredikat3b + $aPredikat4b + 
         $aPredikat1c + $aPredikat2c + $aPredikat3c + $aPredikat4c +$aPredikat1d + $aPredikat2d + $aPredikat3d + $aPredikat4d );
