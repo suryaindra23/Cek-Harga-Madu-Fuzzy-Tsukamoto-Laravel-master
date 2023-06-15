@@ -108,76 +108,52 @@
                         value="{{ $data_form != null ? $data_form['address'] : '' }}">
                 </div>
             </div>
-            <div class="flex flex-wrap -mx-3 mb-6">
-                <div class="w-full md:w-1/6 px-3">
-                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                        for="grid-password">
-                        Berat Madu
-                    </label>
-                    <input
-                        class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-password" type="number" name="luas" placeholder="2 - 100"
-                        value="{{ $data_form != null ? $data_form['luas'] : '' }}">
-                    <p class="text-gray-600 text-xs italic">Dalam satuan Kilogram</p>
-                </div>
-            </div>
             <div class="flex flex-wrap -mx-3 mb-2">
                 <div class="w-full px-3 mb-6 md:mb-0">
                     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-city">
-                        Variant Madu
+                        Variant
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[0]" value="10"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][0]) ? 'checked' : '' }} @endif>
-                        <span span class="ml-2">Multiflora</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[0]" value="10"
+                            @if ($data_form != null) {{ isset($data_form['variant'][0]) ? 'checked' : '' }} @endif>
+                        <span span class="ml-2">Madu Multiflora</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[1]" value="20"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][1]) ? 'checked' : '' }} @endif>
-                        <span class="ml-2">Randu</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[1]" value="20"
+                            @if ($data_form != null) {{ isset($data_form['variant'][1]) ? 'checked' : '' }} @endif>
+                        <span class="ml-2">Madu Randu</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[2]" value="15"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][2]) ? 'checked' : '' }} @endif>
-                        <span span class="ml-2">Kopi</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[2]" value="15"
+                            @if ($data_form != null) {{ isset($data_form['variant'][2]) ? 'checked' : '' }} @endif>
+                        <span span class="ml-2">Madu Kelengkeng</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[3]" value="60"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][3]) ? 'checked' : '' }} @endif>
-                        <span class="ml-2">Durian</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[3]" value="60"
+                            @if ($data_form != null) {{ isset($data_form['variant'][3]) ? 'checked' : '' }} @endif>
+                        <span class="ml-2">Madu Kaliandra</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[4]" value="50"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][4]) ? 'checked' : '' }} @endif>
-                        <span span class="ml-2">Kelengkeng</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[4]" value="50"
+                            @if ($data_form != null) {{ isset($data_form['variant'][4]) ? 'checked' : '' }} @endif>
+                        <span span class="ml-2">Madu Kopi</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[5]" value="35"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][5]) ? 'checked' : '' }} @endif>
-                        <span class="ml-2">Kaliandra</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[5]" value="35"
+                            @if ($data_form != null) {{ isset($data_form['variant'][5]) ? 'checked' : '' }} @endif>
+                        <span class="ml-2">Madu Hutan Liar</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[6]" value="40"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][6]) ? 'checked' : '' }} @endif>
-                        <span span class="ml-2">Rambutan</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[6]" value="40"
+                            @if ($data_form != null) {{ isset($data_form['variant'][6]) ? 'checked' : '' }} @endif>
+                        <span span class="ml-2">Madu Lebah Gong</span>
                     </label>
                     <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[7]" value="30"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][7]) ? 'checked' : '' }} @endif>
-                        <span class="ml-2">Mangga</span>
-                    </label>
-                    <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[8]" value="25"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][8]) ? 'checked' : '' }} @endif>
-                        <span span class="ml-2">Karet</span>
-                    </label>
-                    <label class="inline-flex items-center ml-10 mt-2">
-                        <input type="checkbox" class="form-checkbox" name="fasilitas[9]" value="15"
-                            @if ($data_form != null) {{ isset($data_form['fasilitas'][9]) ? 'checked' : '' }} @endif>
-                        <span class="ml-2">Sonokeling</span>
+                        <input type="checkbox" class="form-checkbox" name="variant[7]" value="30"
+                            @if ($data_form != null) {{ isset($data_form['variant'][7]) ? 'checked' : '' }} @endif>
+                        <span class="ml-2">Madu Akasia</span>
                     </label>
                 </div>
-            </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
                 <div class="w-full md:w-1/6 px-3">
@@ -187,9 +163,9 @@
                     </label>
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-password" type="number" name="enzim_diastase" placeholder="2 - 100"
+                        id="grid-password" type="number" name="enzim_diastase" placeholder="3 - 9"
                         value="{{ $data_form != null ? $data_form['enzim_diastase'] : '' }}">
-                    <p class="text-gray-600 text-xs italic">Dalam satuan Kilogram</p>
+                    <p class="text-gray-600 text-xs italic">Dalam satuan DN</p>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -200,9 +176,9 @@
                     </label>
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-password" type="number" name="kadar_air" placeholder="2 - 100"
+                        id="grid-password" type="number" name="kadar_air" placeholder="10 - 24"
                         value="{{ $data_form != null ? $data_form['kadar_air'] : '' }}">
-                    <p class="text-gray-600 text-xs italic">Dalam satuan Kilogram</p>
+                    <p class="text-gray-600 text-xs italic">Dalam satuan %,B/b</p>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -213,9 +189,9 @@
                     </label>
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-password" type="number" name="glukosa" placeholder="2 - 100"
+                        id="grid-password" type="number" name="glukosa" placeholder="60 - 73"
                         value="{{ $data_form != null ? $data_form['glukosa'] : '' }}">
-                    <p class="text-gray-600 text-xs italic">Dalam satuan Kilogram</p>
+                    <p class="text-gray-600 text-xs italic">Dalam satuan %,B/b</p>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -226,9 +202,9 @@
                     </label>
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-password" type="number" name="hidroksi_metilfurfural" placeholder="2 - 100"
+                        id="grid-password" type="number" name="hidroksi_metilfurfural" placeholder="4 - 26"
                         value="{{ $data_form != null ? $data_form['hidroksi_metilfurfural'] : '' }}">
-                    <p class="text-gray-600 text-xs italic">Dalam satuan Kilogram</p>
+                    <p class="text-gray-600 text-xs italic">Dalam satuan mg/kg</p>
                 </div>
             </div>
             <div class="flex flex-wrap -mx-3 mb-6">
@@ -239,7 +215,7 @@
                     </label>
                     <input
                         class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                        id="grid-password" type="number" name="stok" placeholder="2 - 100"
+                        id="grid-password" type="number" name="stok" placeholder="100 - 2500"
                         value="{{ $data_form != null ? $data_form['stok'] : '' }}">
                     <p class="text-gray-600 text-xs italic">Dalam satuan Kilogram</p>
                 </div>
